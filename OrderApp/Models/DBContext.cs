@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace OrderApp.Models
 {
@@ -10,5 +11,13 @@ namespace OrderApp.Models
         }
 
         public DbSet<Customer> Customers { get; set; } = null!;
+        public DbSet<Order> Orders { get; set; } = null!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Customer>()
+           .HasMany(c => c.Orders)
+           .WithOne(e => e.Customer);
+        }
     }
 }

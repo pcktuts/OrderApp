@@ -15,5 +15,7 @@ namespace OrderApp.Models
         [Required]
         [MaxLength(100)]
         public required string Email { get; set; }
+        public ICollection<Order>? Orders { get; set; }
+
     }
 }
