@@ -14,12 +14,16 @@ namespace OrderApp.Models
         public DbSet<Order> Orders { get; set; } = null!;
 
         public DbSet<Product> Products { get; set; } = null!;
+        public DbSet<OrderDetail> OrderDetails { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>()
            .HasMany(c => c.Orders)
            .WithOne(e => e.Customer);
+
+            modelBuilder.Entity<OrderDetail>()
+                .HasOne(c => c.Product);
         }
     }
 }
